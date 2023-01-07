@@ -10,7 +10,7 @@ func main() {
 
 	mux.HandleFunc("/", home)
 	mux.HandleFunc("/snippets", snippets)
-	mux.HandleFunc("/snipet/create", createSnippet)
+	mux.HandleFunc("/snippet/create", createSnippet)
 
 	log.Println("Starting server on :4000")
 
@@ -20,6 +20,7 @@ func main() {
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
+	UrlRestriction(w, r)
 	w.Write([]byte("Hello from home route"))
 }
 
@@ -29,4 +30,12 @@ func snippets(w http.ResponseWriter, r *http.Request) {
 
 func createSnippet(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Wellcome from create snippett route"))
+}
+
+// url restriction process
+func UrlRestriction(w http.ResponseWriter, r *http.Request) {
+	if r.RequestURI != "/" {
+		http.NotFound(w, r)
+		return
+	}
 }
