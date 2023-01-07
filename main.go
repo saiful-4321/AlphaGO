@@ -39,6 +39,8 @@ func createSnippet(w http.ResponseWriter, r *http.Request) {
 	isAccessable := UrlRestriction(w, r, "/snippet/create")
 	isMethodAllowed := CheckMethod(w, r, "POST")
 
+	settingUpHeader(w, r)
+
 	if isAccessable && isMethodAllowed {
 		w.Write([]byte("Wellcome from create snippet route"))
 	}
@@ -53,6 +55,7 @@ func UrlRestriction(w http.ResponseWriter, r *http.Request, url string) bool {
 	return true
 }
 
+// checking if the method is allowed or not
 func CheckMethod(w http.ResponseWriter, r *http.Request, method string) bool {
 	if r.Method != method {
 		w.WriteHeader(405)
@@ -60,4 +63,15 @@ func CheckMethod(w http.ResponseWriter, r *http.Request, method string) bool {
 		return false
 	}
 	return true
+}
+
+// header customization while request
+func settingUpHeader(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("ALLOW", "POST")
+	w.Header().Set("custom", "test")
+	w.Header().Set("Cache-Control", "public, max-age==31536000")
+	w.Header().Add("Cache-Control", "public")
+	w.Header().Add("Cache-Control", "max-age==31536000")
+	// w.Header().Del("custom")
+	// w.Header().Get("Cache-Control")
 }
