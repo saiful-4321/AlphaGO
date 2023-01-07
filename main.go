@@ -20,22 +20,35 @@ func main() {
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
-	UrlRestriction(w, r)
-	w.Write([]byte("Hello from home route"))
+	isAccessable := UrlRestriction(w, r, "/")
+
+	if isAccessable {
+		w.Write([]byte("Hello from home route"))
+	}
 }
 
 func snippets(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Wellcome from snippets routes"))
+	isAccessable := UrlRestriction(w, r, "/snippets")
+
+	if isAccessable {
+		w.Write([]byte("Wellcome from snippets routes"))
+	}
 }
 
 func createSnippet(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Wellcome from create snippett route"))
+	isAccessable := UrlRestriction(w, r, "/snippet/create")
+
+	if isAccessable {
+		w.Write([]byte("Wellcome from create snippett route"))
+	}
 }
 
 // url restriction process
-func UrlRestriction(w http.ResponseWriter, r *http.Request) {
-	if r.RequestURI != "/" {
+func UrlRestriction(w http.ResponseWriter, r *http.Request, url string) bool {
+	if r.RequestURI != url {
 		http.NotFound(w, r)
-		return
+		return false
 	}
+
+	return true
 }
