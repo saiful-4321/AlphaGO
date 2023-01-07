@@ -37,9 +37,10 @@ func snippets(w http.ResponseWriter, r *http.Request) {
 
 func createSnippet(w http.ResponseWriter, r *http.Request) {
 	isAccessable := UrlRestriction(w, r, "/snippet/create")
+	isMethodAllowed := CheckMethod(w, r, "POST")
 
-	if isAccessable {
-		w.Write([]byte("Wellcome from create snippett route"))
+	if isAccessable && isMethodAllowed {
+		w.Write([]byte("Wellcome from create snippet route"))
 	}
 }
 
@@ -49,6 +50,14 @@ func UrlRestriction(w http.ResponseWriter, r *http.Request, url string) bool {
 		http.NotFound(w, r)
 		return false
 	}
+	return true
+}
 
+func CheckMethod(w http.ResponseWriter, r *http.Request, method string) bool {
+	if r.Method != method {
+		w.WriteHeader(405)
+		w.Write([]byte("Method not allowed"))
+		return false
+	}
 	return true
 }
