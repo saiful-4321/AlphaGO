@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 func main() {
@@ -28,11 +30,13 @@ func home(w http.ResponseWriter, r *http.Request) {
 }
 
 func snippets(w http.ResponseWriter, r *http.Request) {
-	isAccessable := UrlRestriction(w, r, "/snippets")
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
 
-	if isAccessable {
-		w.Write([]byte("Wellcome from snippets routes"))
+	if err != nil || id < 1 {
+		log.Fatal(err)
 	}
+
+	fmt.Printf("The id is %d", id)
 }
 
 func createSnippet(w http.ResponseWriter, r *http.Request) {
@@ -58,8 +62,9 @@ func UrlRestriction(w http.ResponseWriter, r *http.Request, url string) bool {
 // checking if the method is allowed or not
 func CheckMethod(w http.ResponseWriter, r *http.Request, method string) bool {
 	if r.Method != method {
-		w.WriteHeader(405)
-		w.Write([]byte("Method not allowed"))
+		// w.WriteHeader(405)
+		// w.Write([]byte("Method not allowed"))
+		http.Error(w, "Method not allowed", 405)
 		return false
 	}
 	return true
