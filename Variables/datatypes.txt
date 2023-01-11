@@ -1,0 +1,16 @@
+Atomic data types
+    String
+    int
+    int32
+    int64
+    uint
+    uint32
+    uint64
+
+Unsafe
+    Pinters
+
+Abstract data types
+    map[]
+    struct{}
+    interface{}
