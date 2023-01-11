@@ -18,10 +18,8 @@ func main() {
 	teach.updateDetails("Saiful", "Eleven", "Teaching")
 }
 
-func (teacher Details) updateDetails(name string, class string, profession string) {
+func (teacher *Details) updateDetails(name string, class string, profession string) {
 	teacher.Name = name
 	teacher.Class = class
 	teacher.Profession = profession
-
-	fmt.Println(teacher)
 }
