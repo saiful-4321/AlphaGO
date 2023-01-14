@@ -1,0 +1,5 @@
+A pointer is a variable which stores the memory address of another variable.
+    &symbol is called referencing symbol also called the referance operator
+        It is used to get the address of a variable
+    *symbolis used to dereferancing symbol also called dereferance operator
+        It is used to get the value of a pointer
