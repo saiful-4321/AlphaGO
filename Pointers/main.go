@@ -4,15 +4,23 @@ import "fmt"
 
 func main() {
 	fmt.Println("Welcome to pointers section.")
+	// name := "saiful"
+	// ptr := &name
+	// ptr2 := &name
+	// fmt.Println(ptr)
+	// fmt.Println(*ptr2)
 
-	name := "saiful"
+	name, greetings := "saiful", "Hello"
 
-	ptr := &name
-	fmt.Println(ptr)
+	fmt.Println(name, greetings)
+	swap(&name, &greetings)
+	fmt.Println(name, greetings)
+}
 
-	name = "Islam"
-	ptr = &name
+func swap(name, greetings *string) {
+	var temp string
 
-	fmt.Println(name)
-	fmt.Println(ptr)
+	temp = *greetings
+	*greetings = *name
+	*name = temp
 }
