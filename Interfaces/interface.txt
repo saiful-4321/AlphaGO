@@ -1,1 +1,2 @@
 Interfaces are name collection of method signatures
+    An empty interface is like a blackbox which means you can pass anything or any type of db.
