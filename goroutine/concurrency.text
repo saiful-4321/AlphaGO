@@ -1,0 +1,17 @@
+Concurrency in Golang is the ability for functions to run independently of each other. 
+Parallelism is a run-time property where two or more tasks are being executed simultaneously. Through concurrency, you want to define a 
+proper structure for your program.
+
+GO ROUTINE : A goroutine is a lightweight execution thread in the Go programming language and a function that executes concurrently with the rest of the 
+program. Goroutines are incredibly cheap when compared to traditional threads as the overhead of creating a goroutine is very low.
+Go ships with it go routines, which executes a function asynchronously.
+
+An asynchronous process is a process that the Workflow Engine cannot complete immediately because it contains activities that interrupt the 
+flow. Examples of activities that force an asynchronous process include deferred activities, notifications with responses,
+blocking activities, and wait activities.
+
+The Golang Sync package provides synchronization primitives, such as mutex, Waitgroup, Pool, Read and Write mutex, and condition variables.
+
+In golang child process concurrency is dependent on parent function. while parent is stop executing the child will stop executing as well
+
+
