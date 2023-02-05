@@ -1,12 +1,16 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 )
 
 func main() {
-	fmt.Println("welcome to basic server section")
-
-	http.ListenAndServe("localhost:3000", nil)
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("hello from home route"))
+	})
+	mux.HandleFunc("/posts", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("hello from posts route"))
+	})
+	http.ListenAndServe("localhost:3000", mux)
 }
