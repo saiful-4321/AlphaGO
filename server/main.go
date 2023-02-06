@@ -6,11 +6,11 @@ import (
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("hello from home route"))
+
+	mux.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodGet {
+			w.Write([]byte("Pong"))
+		}
 	})
-	mux.HandleFunc("/posts", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("hello from posts route"))
-	})
-	http.ListenAndServe("localhost:3000", mux)
+	http.ListenAndServe(":3000", nil)
 }
